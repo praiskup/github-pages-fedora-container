@@ -1,5 +1,9 @@
 #! /bin/bash -x
 
+# Even though everything should be ready in many cases, use Gemfile and install
+# the dependencies now (if any are missing).
+bundler install
+
 # We start Jekyll on the port 5000, even though we expose port 4000 in
 # Dockerfile (the normal default port of local Jekyll).  The problem is that
 # Jekyll doesn't seem to accept connections elsewhere than on 127.0.0.1, which
