@@ -1,8 +1,8 @@
 Fedora based image for github-pages
 -----------------------------------
 
-Podman container image based on Fedora for local testing of 'github-pages'
-based blogs.
+A Podman container image based on the Fedora image, usable for local testing
+of 'github-pages' based blogs.
 
 
 How to use
