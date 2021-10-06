@@ -1,8 +1,9 @@
-Fedora based image for github-pages
------------------------------------
+Fedora based image for Jekyll (optionally with github-pages)
+------------------------------------------------------------
 
-A Podman container image based on the Fedora image, usable for local testing
-of 'github-pages' based blogs.
+This project provides a Podman container image based on the Fedora image, usable
+for local testing of Jekyll web-pages/blogs, optionally depending on
+the 'github-pages' module.
 
 
 How to use
