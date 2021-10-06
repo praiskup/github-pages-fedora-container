@@ -9,13 +9,19 @@ the 'github-pages' module.
 How to use
 ----------
 
-Add this project as your blog post git submodule, and you can test anytime
-using just 'make'.
+Simple start can be done out-of-tree:
 
 ```
-$ cd <your blog post root>
+$ JEKYLL_ROOT=<your jekyll directory> make
+```
+
+Though, if you add this project as your git submodule, and you can test anytime
+using just the 'make' command:
+
+```
+$ cd <your jekyll pages root>
 $ git submodule add --name testing-container https://github.com/praiskup/github-pages-fedora-container testing-container
-Cloning into '/<your blog post root>/testing-container'...
+Cloning into '/<your jekyll pages root>/testing-container'...
 remote: Enumerating objects: 23, done.
 remote: Counting objects: 100% (23/23), done.
 remote: Compressing objects: 100% (16/16), done.
