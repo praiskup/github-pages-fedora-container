@@ -10,7 +10,7 @@ bundler install
 # is not the case when Podman container is accessed from host:
 # https://github.com/jekyll/jekyll/issues/8846
 
-bundler exec jekyll serve --drafts --port 5000 --detach
+bundler exec jekyll serve --drafts --port 5000 --detach --livereload
 
 # Execute tinyproxy, which allows connections from 0.0.0.0, and redirects the
 # container's 4000 port to Jekyll's 5000.
