@@ -15,6 +15,12 @@ Simple start can be done out-of-tree:
 $ JEKYLL_ROOT=<your jekyll directory> make
 ```
 
+or (if you don't want to clone this repo):
+
+```
+$ podman run --rm -ti -p 4000:4000 -v <your/jekyll/root/dir>:/the-jekyll-root:z github-jekyll
+```
+
 Though, if you add this project as your git submodule, and you can test anytime
 using just the 'make' command:
 
