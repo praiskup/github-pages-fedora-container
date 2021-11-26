@@ -2,8 +2,14 @@ Fedora based image for Jekyll (optionally with github-pages)
 ------------------------------------------------------------
 
 This project provides a Podman container image based on the Fedora image, usable
-for local testing of Jekyll web-pages/blogs, optionally depending on
-the 'github-pages' module.
+for local testing of Jekyll web-pages/blogs.
+
+Optionally your pages can depend on **github-pages** package.  But note that you
+can not specify `github-pages` inside your `Gemfile` as `gem 'github-pages'`.
+This wouldn't work - the variant installed by bundler from `Gemfile` wouldn't
+work with on the Fedora container base where is Ruby >= 3.0.  The absence of
+this gem is not a problem in practice because (a) GitHub installs it
+automatically, and (b) this projects has it too.
 
 
 How to use
