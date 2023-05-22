@@ -1,5 +1,7 @@
 #! /bin/bash -x
 
+# Copyright (C) 2022-2023, Pavel Raiskup
+
 # Even though everything should be ready in many cases, use Gemfile and install
 # the dependencies now (if any are missing).
 bundler install
