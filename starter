@@ -16,4 +16,11 @@ bundler exec jekyll serve --drafts --port 5000 --incremental &
 
 # Execute tinyproxy, which allows connections from 0.0.0.0, and redirects the
 # container's 4000 port to Jekyll's 5000.
+
+echo
+echo
+echo "CONNECT TO 127.0.0.1:4000!, not 5000 as jekyll claims"
+echo
+echo
+
 tinyproxy -d
