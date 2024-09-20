@@ -1,4 +1,4 @@
-FROM registry.fedoraproject.org/fedora:38
+FROM registry.fedoraproject.org/fedora:40
 
 RUN dnf install -y \
     /usr/bin/gem \
@@ -16,7 +16,9 @@ RUN dnf install -y \
     /usr/bin/nc \
     && dnf clean all
 
-RUN gem install \
+# Error installing jekyll:
+# "sass" from sass-embedded conflicts with installed executable from sass
+RUN gem install sass-embedded -v 1.58.0 && gem install \
     github-pages \
     jekyll \
     webrick
