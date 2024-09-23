@@ -1,4 +1,5 @@
 online_image=quay.io/praiskup/github-pages
+local_image=github-pages-local
 
 run: clean-gemfile
 	rm -f ../Gemfile.lock
@@ -11,8 +12,11 @@ clean-gemfile:
 
 run-local: clean-gemfile build
 	jekyll_root=$${JEKYLL_ROOT-`pwd`/..} ; \
-	podman run --rm -ti -p 4000:4000 -v $$jekyll_root:/the-jekyll-root:z github-jekyll
+	podman run --rm -ti -p 4000:4000 -v $$jekyll_root:/the-jekyll-root:z $(local_image)
+
+push:
+	podman push  $(local_image) $(online_image)
 
 
 build:
-	podman build . -t github-jekyll
+	podman build . -t $(local_image)
