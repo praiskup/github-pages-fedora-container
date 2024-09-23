@@ -20,10 +20,20 @@ How to use the container
 Simple start can be done out-of-tree:
 
 ```
-$ JEKYLL_ROOT=<your jekyll directory> make
+$ jekyll-host ~/home/you/your-project/jekyll-root
 ```
 
-or (if you don't want to clone this repo):
+Get the "stub" script from from source:
+
+```
+$ curl https://raw.githubusercontent.com/praiskup/jekyll-github-pages-fedora-container/refs/heads/main/jekyll-host | tee ~/bin/jekyll-host
+
+$ chmod +x ~/bin/jekyll-host
+$ cat ~/bin/jekyll-host
+
+```
+
+Or if you prefer direct run:
 
 ```
 $ podman run --rm -ti -p 4000:4000 -v "$JEKYLL_ROOT:/the-jekyll-root:z" quay.io/praiskup/github-pages
