@@ -28,7 +28,7 @@ Get the "stub" script from from source:
 ```
 $ curl https://raw.githubusercontent.com/praiskup/jekyll-github-pages-fedora-container/refs/heads/main/jekyll-host | tee ~/bin/jekyll-host
 #! /bin/sh -x
-podman run --rm -ti -p 4000:4000 -v "$1:/the-jekyll-root:z" quay.io/praiskup/github-pages
+podman run --rm -ti -p 4000:4000 -v "$(readlink -f "$1"):/the-jekyll-root:z" quay.io/praiskup/github-pages
 $ chmod +x ~/bin/jekyll-host
 ```
 
