@@ -1,18 +1,20 @@
-Fedora-based Image for Jekyll (Optionally with GitHub Pages)
-============================================================
+Container Image for Jekyll writers
+==================================
 
-This project provides a Podman container image based on Fedora, designed for
+This project provides a container image based on Fedora distro, designed for
 local testing of Jekyll websites or blogs.
 
 Optionally, your pages can depend on the **github-pages** package.  However,
 note that you cannot specify `github-pages` in your `Gemfile` as `gem
-'github-pages'` dependency.  This approach won’t work—the variant installed by
-Bundler from the `Gemfile` is incompatible with the Fedora container base, which
-uses Ruby >= 3.0.
+'github-pages'` dependency.  If you already do, drop the requirement.
 
 In practice, the absence of this gem in `Gemfile` is not an issue because
 (a) GitHub environment automatically installs it, and that is why
 (b) this container image installs it automatically as well.
+
+Background story, installing `github-pages` is a non-trivial task, especially on
+Fedora which uses Ruby >= v3.0.
+
 
 How to use the container
 ------------------------
@@ -23,19 +25,20 @@ Simple start can be done out-of-tree:
 $ jekyll-host ~/home/you/your-project/jekyll-root
 ```
 
-Get the "stub" script from from source:
+Don't you have the `~/bin/jekyl-host` script yet?  Get the "stub" script from
+from source:
 
 ```
-$ curl https://raw.githubusercontent.com/praiskup/jekyll-github-pages-fedora-container/refs/heads/main/jekyll-host | tee ~/bin/jekyll-host
+$ curl https://raw.githubusercontent.com/praiskup/jekyll-container/refs/heads/main/jekyll-host | tee ~/bin/jekyll-host
 #! /bin/sh -x
-podman run --rm -ti -p 4000:4000 -v "$(readlink -f "$1"):/the-jekyll-root:z" quay.io/praiskup/github-pages
+podman run --rm -ti -p 4000:4000 -v "$(readlink -f "$1"):/the-jekyll-root:z" quay.io/praiskup/jekyll
 $ chmod +x ~/bin/jekyll-host
 ```
 
 Or if you prefer direct run:
 
 ```
-$ podman run --rm -ti -p 4000:4000 -v "$JEKYLL_ROOT:/the-jekyll-root:z" quay.io/praiskup/github-pages
+$ podman run --rm -ti -p 4000:4000 -v "$JEKYLL_ROOT:/the-jekyll-root:z" quay.io/praiskup/jekyll
 ```
 
 This works well as git-submodule of your project:
@@ -43,7 +46,7 @@ This works well as git-submodule of your project:
 ```
 $ cd <your jekyll pages root>
 
-$ git submodule add --name testing-container https://github.com/praiskup/github-pages-fedora-container testing-container
+$ git submodule add --name testing-container https://github.com/praiskup/jekyll-container testing-container
 Cloning into '/<your jekyll pages root>/testing-container'...
 remote: Enumerating objects: 23, done.
 remote: Counting objects: 100% (23/23), done.
@@ -59,7 +62,7 @@ jekyll_root=${JEKYLL_ROOT-`pwd`/..} ; \
 rm -f "$jekyll_root"/Gemfile.lock
 rm -f ../Gemfile.lock
 jekyll_root=${JEKYLL_ROOT-`pwd`/..} ; \
-podman run --rm -ti -p 4000:4000 -v $jekyll_root:/the-jekyll-root:z quay.io/praiskup/github-pages
+podman run --rm -ti -p 4000:4000 -v $jekyll_root:/the-jekyll-root:z quay.io/praiskup/jekyll
 + : installing deps, may tay several minutes
 + bundler install
 + cat

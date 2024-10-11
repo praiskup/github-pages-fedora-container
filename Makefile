@@ -1,5 +1,5 @@
-online_image=quay.io/praiskup/github-pages
-local_image=github-pages-local
+online_image=quay.io/praiskup/jekyll
+local_image=jekyll
 
 run: clean-gemfile
 	rm -f ../Gemfile.lock
