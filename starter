@@ -1,12 +1,13 @@
-#! /bin/bash -x
+#! /bin/bash
 
 # Copyright (C) 2022-2024, Pavel Raiskup
 
 # Even though everything should be ready in many cases, use Gemfile and install
 # the dependencies now (if any are missing).
 
-: installing deps, may tay several minutes
-bundler install &> /tmp/bundler-install.log
+bundler_log=/tmp/bundler-install.log
+echo "Installing deps, may take several minutes (see $bundler_log in container)"
+bundler install &> "$bundler_log"
 
 # We start Jekyll on the port 5000, even though we expose port 4000 in
 # Dockerfile (the normal default port of local Jekyll).  The problem is that
@@ -14,7 +15,8 @@ bundler install &> /tmp/bundler-install.log
 # is not the case when Podman container is accessed from host:
 # https://github.com/jekyll/jekyll/issues/8846
 
-bundler exec jekyll serve --drafts --port 5000 --incremental &>/tmp/jekyll-server.log &
+jekyll_log=/tmp/jekyll-server.log
+bundler exec jekyll serve --drafts --port 5000 --incremental &>"$jekyll_log" &
 
 # Execute tinyproxy, which allows connections from 0.0.0.0, and redirects the
 # container's 4000 port to Jekyll's 5000.
@@ -22,6 +24,8 @@ bundler exec jekyll serve --drafts --port 5000 --incremental &>/tmp/jekyll-serve
 cat <<EOF
 =========================================
  Server listens on http://127.0.0.1:4000
+ Jekyll Log: $jekyll_log (in container)
+ Install logs: $bundler_log (in container)
 =========================================
 EOF
 tinyproxy -d

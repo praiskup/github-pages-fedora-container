@@ -23,6 +23,13 @@ Simple start can be done out-of-tree:
 
 ```
 $ jekyll-host ~/home/you/your-project/jekyll-root
+podman run --rm -ti -p 4000:4000 -v $jekyll_root:/the-jekyll-root:z jekyll
+Installing deps, may take several minutes (see /tmp/bundler-install.log in container)
+=========================================
+ Server listens on http://127.0.0.1:4000
+ Jekyll Log: /tmp/jekyll-server.log (in container)
+ Install logs: /tmp/bundler-install.log (in container)
+=========================================
 ```
 
 Don't you have the `~/bin/jekyl-host` script yet?  Get the "stub" script from
@@ -58,19 +65,12 @@ Resolving deltas: 100% (7/7), done.
 $ cd testing-container
 
 $ make
-jekyll_root=${JEKYLL_ROOT-`pwd`/..} ; \
-rm -f "$jekyll_root"/Gemfile.lock
-rm -f ../Gemfile.lock
-jekyll_root=${JEKYLL_ROOT-`pwd`/..} ; \
-podman run --rm -ti -p 4000:4000 -v $jekyll_root:/the-jekyll-root:z quay.io/praiskup/jekyll
-+ : installing deps, may tay several minutes
-+ bundler install
-+ cat
-+ bundler exec jekyll serve --drafts --port 5000 --incremental
+...
 =========================================
  Server listens on http://127.0.0.1:4000
+ Jekyll Log: /tmp/jekyll-server.log (in container)
+ Install logs: /tmp/bundler-install.log (in container)
 =========================================
-+ tinyproxy -d
 ```
 
 Quit by `CTRL+C`.
